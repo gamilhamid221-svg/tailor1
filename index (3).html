@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>طلب خياطة</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f1ea;--card:#fff;--tx:#2b2520;--mut:#85796c;--bd:#e8e0d3;--ac:#8a5a2b;--ac2:#f6ead9;--acx:#fff;--dg:#b3261e;--sh:0 2px 10px rgba(80,55,30,.08);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171411;--card:#221e1a;--tx:#f3ede4;--mut:#aa9f92;--bd:#372f28;--ac:#d9a066;--ac2:#3a2d1f;--acx:#1b1815;--dg:#f2938c;--sh:none}}
+:root[data-theme="dark"]{--bg:#171411;--card:#221e1a;--tx:#f3ede4;--mut:#aa9f92;--bd:#372f28;--ac:#d9a066;--ac2:#3a2d1f;--acx:#1b1815;--dg:#f2938c;--sh:none}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);overscroll-behavior:none;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Cairo',Tahoma,Arial,sans-serif;font-size:14.5px;min-height:100dvh;overflow-x:hidden;overscroll-behavior:none;-webkit-text-size-adjust:100%;touch-action:manipulation}
+main{max-width:720px;margin:0 auto;padding:8px 8px 20px}
+.top{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#8a5a2b,#b07a42);color:#fff;border-radius:18px;padding:16px;margin-bottom:14px;box-shadow:var(--sh)}
+.logo{font-size:22px;background:rgba(255,255,255,.22);border-radius:14px;width:42px;height:42px;display:grid;place-items:center;flex:none}
+.top h1{font-size:17px;margin:0}
+.top p{font-size:12px;margin:2px 0 0;opacity:.92}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px;margin-bottom:12px;box-shadow:var(--sh)}
+#items .card{border-inline-start:4px solid var(--ac)}
+.ct{font-weight:700;color:var(--ac);font-size:14px;margin-bottom:12px}
+label{display:block;font-size:12px;font-weight:600;color:var(--mut);margin:0 0 5px}
+input{width:100%;padding:10px 12px;border:1.5px solid var(--bd);border-radius:12px;background:var(--bg);color:var(--tx);font:inherit;outline:none;transition:.15s}
+input:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--ac2)}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.f{margin-bottom:12px}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-weight:700}
+.ttl{display:flex;align-items:center;gap:8px}
+.num{width:24px;height:24px;border-radius:50%;background:var(--ac);color:var(--acx);display:grid;place-items:center;font-size:12px}
+button{font:inherit;border:0;border-radius:14px;padding:13px 16px;cursor:pointer}
+.p{background:var(--ac);color:var(--acx);font-weight:700;font-size:15px;width:100%;padding:13px;box-shadow:var(--sh)}
+.s{background:var(--ac2);border:1.5px dashed var(--ac);color:var(--ac);font-weight:700;width:100%;margin-bottom:12px}
+.d{background:transparent;color:var(--dg);padding:4px 8px;font-size:13px}
+.sum{display:flex;gap:10px;margin:4px 0 14px}
+.sum span{flex:1;text-align:center;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:10px;font-weight:600;font-size:13px}
+.msg{text-align:center;color:var(--mut);font-size:13px;min-height:22px;margin-top:10px;line-height:1.7}
+.rd{display:flex;gap:10px}
+.rd label{display:flex;align-items:center;justify-content:center;gap:8px;flex:1;margin:0;padding:9px 12px;border:1.5px solid var(--bd);border-radius:12px;background:var(--bg);color:var(--tx);font-size:14px;font-weight:600;cursor:pointer}
+.rd label:has(input:checked){border-color:var(--ac);background:var(--ac2);color:var(--ac)}
+.rd input{width:auto;margin:0;accent-color:var(--ac)}
+#sheet{position:absolute;left:-10000px;top:0;width:794px;background:#fff;color:#111;padding:40px;direction:rtl;font-family:'Cairo',Tahoma,Arial,sans-serif}
+#sheet h2{margin:0 0 14px;font-size:26px;text-align:center;background:#8a5a2b;color:#fff;padding:14px;border-radius:12px}
+#sheet .meta{display:flex;justify-content:space-between;background:#f6ead9;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:16px}
+#sheet table{width:100%;border-collapse:collapse;font-size:14px}
+#sheet th,#sheet td{border:1px solid #d8cdbd;padding:6px;text-align:center}
+#sheet th{background:#8a5a2b;color:#fff}
+#sheet tbody tr:nth-child(even){background:#faf6ef}
+#sheet .tot{margin-top:16px;font-weight:700;font-size:20px;background:#8a5a2b;color:#fff;border-radius:10px;padding:14px 18px;text-align:center}
+[hidden]{display:none!important}
+.tabs{display:flex;gap:8px;margin-bottom:14px}
+.tab{flex:1;background:var(--card);border:1.5px solid var(--bd);color:var(--mut);font-weight:700;padding:11px 8px;font-size:14px;border-radius:14px}
+.tab.on{background:var(--ac);border-color:var(--ac);color:var(--acx)}
+.tab b{background:var(--ac2);color:var(--ac);border-radius:10px;padding:0 7px;margin-inline-start:4px;font-size:12px}
+.tab.on b{background:rgba(255,255,255,.25);color:var(--acx)}
+.eb{display:flex;justify-content:space-between;align-items:center;background:var(--ac2);font-weight:700;color:var(--ac);padding:10px 14px}
+.cn{font-size:16px}
+.od{color:var(--mut);font-size:13px;margin-top:2px}
+.dt{border-top:1px solid var(--bd);padding-top:10px;margin-top:10px}
+.dh{font-weight:700;margin-bottom:6px;display:flex;gap:8px;align-items:center}
+.dh b{background:var(--ac2);color:var(--ac);border-radius:50%;width:22px;height:22px;display:grid;place-items:center;font-size:12px}
+.dg2{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;font-size:13px}
+.nt{font-size:13px;color:var(--mut);margin-top:4px}
+.acts{display:flex;gap:8px;margin-top:12px}
+.b{flex:1;background:var(--ac2);color:var(--ac);font-weight:700;font-size:13px;padding:10px 6px;border-radius:12px}
+.b.dn{background:transparent;color:var(--dg);border:1.5px solid var(--dg)}
+.empty{text-align:center;color:var(--mut);padding:40px 0}
+</style>
+<meta name="theme-color" content="#8a5a2b">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="طلب خياطة">
+</head>
+<body>
+<main>
+<header class="top"><div class="logo">🪟</div><div><h1>طلب خياطة ستائر</h1><p>أدخل المواصفات ثم أرسلها للخياط</p></div></header>
+<nav class="tabs"><button class="tab on" id="tab-new">طلب جديد</button><button class="tab" id="tab-orders">الطلبات المحفوظة <b id="oc">0</b></button></nav>
+
+<section id="v-new">
+<div class="card eb" id="eb" hidden><span>✏️ تعديل طلب محفوظ</span><button class="d" id="cancel">إلغاء التعديل</button></div>
+<div class="card">
+  <div class="ct">بيانات العميل</div>
+  <div class="f"><label for="cust">اسم العميل</label><input id="cust" placeholder="مثال: أحمد محمد"></div>
+</div>
+<div id="items"></div>
+<button class="s" id="add">+ إضافة ستارة</button>
+<div class="sum"><span id="cnt"></span></div>
+<button class="p" id="pdf">حفظ الطلب وتحويله إلى PDF</button>
+<div class="msg" id="msg"></div>
+<button class="s" id="newjob" style="margin-top:14px">+ عميل جديد</button>
+</section>
+
+<section id="v-list" hidden>
+<div id="orders"></div>
+<div class="msg" id="lmsg"></div>
+</section>
+</main>
+
+<div id="sheet"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LS={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const blank=()=>({fabric:'',type:'',w:'',h:'',note:'',place:'',lines:'خط',gap:'فجة'});
+const clone=x=>JSON.parse(JSON.stringify(x));
+let items=[],editingId=null,orders=LS.get('curtains-orders')||[];
+const d0=LS.get('curtains-draft');
+if(d0){items=d0.items||[];$('cust').value=d0.cust||''}
+if(!items.length)items=[blank()];
+
+function saveDraft(){if(!editingId)LS.set('curtains-draft',{items,cust:$('cust').value})}
+function field(i,k,label,extra=''){return `<div><label>${label}</label><input data-i="${i}" data-k="${k}" value="${String(items[i][k]??'').replace(/"/g,'&quot;')}" ${extra}></div>`}
+function render(){
+  $('items').innerHTML=items.map((it,i)=>`<div class="card">
+    <div class="hd"><span class="ttl"><b class="num">${i+1}</b>ستارة</span>${items.length>1?`<button class="d" data-del="${i}">حذف ✕</button>`:''}</div>
+    <div class="f">${field(i,'place','المكان','placeholder="مثال: صالة، غرفة نوم"')}</div>
+    <div class="g">${field(i,'fabric','نوع القماش','placeholder="اكتب نوع القماش"')}${field(i,'type','نظام الستارة','placeholder="اكتب نظام الستارة"')}</div>
+    <div class="g">${field(i,'w','العرض (سم)','type="number" inputmode="decimal" min="0"')}${field(i,'h','الارتفاع (سم)','type="number" inputmode="decimal" min="0"')}</div>
+    <div class="f">${field(i,'note','ملاحظات')}</div>
+    <div class="f"><label>ستارة</label><div class="rd">${['خط','خطين'].map(v=>`<label><input type="radio" name="ln${i}" data-i="${i}" data-k="lines" value="${v}" ${(it.lines||'خط')===v?'checked':''}> ${v}</label>`).join('')}</div></div>
+    <div class="f"><label>الفجة</label><div class="rd">${['فجة','فجتين'].map(v=>`<label><input type="radio" name="gp${i}" data-i="${i}" data-k="gap" value="${v}" ${(it.gap||'فجة')===v?'checked':''}> ${v}</label>`).join('')}</div></div>
+  </div>`).join('');
+  stats();
+}
+const total=a=>a.length;
+function stats(){$('cnt').textContent='عدد الستائر: '+total(items)}
+$('items').addEventListener('input',e=>{const t=e.target;if(t.dataset.k){items[+t.dataset.i][t.dataset.k]=t.value;stats();saveDraft()}});
+$('items').addEventListener('click',e=>{const x=e.target.dataset.del;if(x!==undefined){items.splice(+x,1);render();saveDraft()}});
+$('add').onclick=()=>{items.push(blank());render();saveDraft();window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})};
+$('cust').oninput=saveDraft;
+
+function setEditUI(){
+  $('eb').hidden=!editingId;
+  $('pdf').textContent=editingId?'حفظ التعديلات وتحويلها إلى PDF':'حفظ الطلب وتحويله إلى PDF';
+}
+function resetForm(){
+  editingId=null;items=[blank()];$('cust').value='';$('msg').textContent='';
+  LS.set('curtains-draft',{items,cust:''});render();setEditUI();
+}
+
+function show(v){
+  $('v-new').hidden=v!=='new';$('v-list').hidden=v!=='orders';
+  $('tab-new').classList.toggle('on',v==='new');$('tab-orders').classList.toggle('on',v==='orders');
+  $('oc').textContent=orders.length;
+  if(v==='orders')renderOrders();
+  window.scrollTo(0,0);
+}
+function go(v){try{location.hash=v==='orders'?'orders':'new'}catch(e){}show(v)}
+window.addEventListener('hashchange',()=>show(location.hash==='#orders'?'orders':'new'));
+$('tab-orders').onclick=()=>go('orders');
+$('tab-new').onclick=()=>{if(editingId)resetForm();go('new')};
+$('cancel').onclick=()=>{resetForm();go('orders')};
+
+function renderOrders(){
+  $('lmsg').textContent='';
+  $('orders').innerHTML=orders.length?orders.map(o=>{
+    const det=o.items.map((b,i)=>`<div class="dt"><div class="dh"><b>${i+1}</b>${esc(b.place||'ستارة')}</div><div class="dg2"><span>القماش: ${esc(b.fabric||'—')}</span><span>النظام: ${esc(b.type||'—')}</span><span>العرض: ${esc(b.w||'—')} سم</span><span>الارتفاع: ${esc(b.h||'—')} سم</span><span>${esc(b.lines||'خط')} · ${esc(b.gap||'فجة')}</span></div>${b.note?`<div class="nt">ملاحظات: ${esc(b.note)}</div>`:''}</div>`).join('');
+    return `<div class="card"><b class="cn">${esc(o.cust)}</b><div class="od">${esc(o.date)} · ${total(o.items)} ستارة</div>${det}<div class="acts"><button class="b" data-act="pdf" data-id="${o.id}">PDF 📄</button><button class="b" data-act="edit" data-id="${o.id}">تعديل ✏️</button><button class="b dn" data-act="del" data-id="${o.id}">حذف 🗑</button></div></div>`}).join(''):'<div class="empty">لا توجد طلبات محفوظة بعد</div>';
+}
+$('orders').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-act]');if(!b)return;
+  const o=orders.find(x=>x.id===b.dataset.id);if(!o)return;
+  const act=b.dataset.act;
+  if(act==='pdf')exportPdf(o,$('lmsg'));
+  else if(act==='edit'){editingId=o.id;items=clone(o.items);$('cust').value=o.cust;$('msg').textContent='';render();setEditUI();go('new')}
+  else if(act==='del'){
+    if(b.dataset.armed){orders=orders.filter(x=>x.id!==o.id);LS.set('curtains-orders',orders);$('oc').textContent=orders.length;renderOrders()}
+    else{b.dataset.armed=1;b.textContent='تأكيد الحذف؟';setTimeout(()=>{if(b.isConnected){delete b.dataset.armed;b.textContent='حذف 🗑'}},3500)}
+  }
+});
+
+function buildSheet(o){
+  $('sheet').innerHTML=`<h2>طلب خياطة ستائر</h2>
+  <div class="meta"><span>العميل: <b>${esc(o.cust||'—')}</b></span><span>التاريخ: ${esc(o.date)}</span><span>إجمالي الستائر: <b>${total(o.items)}</b></span></div>
+  <table><thead><tr><th>#</th><th>المكان</th><th>نوع القماش</th><th>نظام الستارة</th><th>العرض (سم)</th><th>الارتفاع (سم)</th><th>ستارة</th><th>الفجة</th><th>ملاحظات</th></tr></thead><tbody>
+  ${o.items.map((b,i)=>`<tr><td>${i+1}</td><td>${esc(b.place||'—')}</td><td>${esc(b.fabric||'—')}</td><td>${esc(b.type||'—')}</td><td>${esc(b.w||'—')}</td><td>${esc(b.h||'—')}</td><td>${esc(b.lines||'خط')}</td><td>${esc(b.gap||'فجة')}</td><td>${esc(b.note||'')}</td></tr>`).join('')}
+  </tbody></table>
+  <div class="tot">إجمالي الستائر: ${total(o.items)}</div>`;
+}
+
+async function exportPdf(o,msg){
+  msg.textContent='جارٍ إنشاء الملف...';
+  try{
+    buildSheet(o);
+    await document.fonts.ready;
+    const canvas=await html2canvas($('sheet'),{scale:2,backgroundColor:'#ffffff'});
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF('p','mm','a4');
+    const img=canvas.toDataURL('image/jpeg',0.95);
+    const W=210,H=canvas.height*W/canvas.width;
+    for(let y=0;y<H;y+=297){if(y>0)pdf.addPage();pdf.addImage(img,'JPEG',0,-y,W,H)}
+    const blob=pdf.output('blob');
+    const name='ستائر-'+o.cust.replace(/[\\\/:*?"<>|]/g,'')+'.pdf';
+    let shared=false;
+    const file=new File([blob],name,{type:'application/pdf'});
+    try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'طلب ستائر'});shared=true}}
+    catch(e){if(e&&e.name==='AbortError'){msg.textContent='تم حفظ الطلب ✅ وإلغاء إنشاء الملف';return}}
+    if(!shared){
+      const dl=await (window.claude&&window.claude.use?window.claude.use('downloads'):null);
+      if(dl){await dl.save({filename:name,data:blob})}else{pdf.save(name)}
+    }
+    msg.textContent=shared?'تمت المشاركة ✅':'تم حفظ الملف ✅ يمكنك الآن إرساله للخياط';
+  }catch(e){
+    msg.textContent=(e&&e.code==='declined')?'تم حفظ الطلب ✅ وإلغاء إنشاء الملف':'تعذر إنشاء الملف، يمكنك المحاولة من زر PDF';
+  }
+}
+
+$('pdf').onclick=async()=>{
+  const msg=$('msg');
+  if(!$('cust').value.trim()){msg.textContent='الرجاء إدخال اسم العميل';$('cust').focus();return}
+  if(items.some(b=>!b.w||!b.h)){msg.textContent='الرجاء إدخال العرض والارتفاع لكل ستارة';return}
+  const old=editingId?orders.find(x=>x.id===editingId):null;
+  const o={id:editingId||Date.now().toString(36),cust:$('cust').value.trim(),items:clone(items),date:old?old.date:new Date().toLocaleDateString('en-GB')};
+  const k=orders.findIndex(x=>x.id===o.id);
+  if(k>=0)orders[k]=o;else orders.unshift(o);
+  LS.set('curtains-orders',orders);
+  resetForm();go('orders');
+  await exportPdf(o,$('lmsg'));
+};
+
+$('newjob').onclick=()=>{
+  const msg=$('msg');
+  const hasData=$('cust').value.trim()||items.some(b=>b.place||b.fabric||b.type||b.w||b.h||b.note);
+  if(hasData){
+    if(!$('cust').value.trim()){msg.textContent='اكتب اسم العميل أولًا ليُحفظ الطلب';$('cust').focus();return}
+    const old=editingId?orders.find(x=>x.id===editingId):null;
+    const o={id:editingId||Date.now().toString(36),cust:$('cust').value.trim(),items:clone(items),date:old?old.date:new Date().toLocaleDateString('en-GB')};
+    const k=orders.findIndex(x=>x.id===o.id);
+    if(k>=0)orders[k]=o;else orders.unshift(o);
+    LS.set('curtains-orders',orders);
+    resetForm();$('oc').textContent=orders.length;
+    msg.textContent='تم حفظ طلب «'+o.cust+'» في الطلبات المحفوظة ✅ يمكنك الآن إدخال عميل جديد';
+  }else resetForm();
+  window.scrollTo({top:0,behavior:'smooth'});$('cust').focus();
+};
+render();setEditUI();
+if(location.hash==='#orders')show('orders');else $('oc').textContent=orders.length;
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script>
+</body>
+</html>
